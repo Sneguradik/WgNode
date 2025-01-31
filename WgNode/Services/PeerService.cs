@@ -13,7 +13,7 @@ public interface IPeerService
     Task RemovePeerFromDb(IEnumerable<Peer> peers);
 }
 
-public class PeerService(MainDbContext context, ILogger<PeerService> logger, ServerStorage serverStorage) : IPeerService
+public class PeerService(MainDbContext context, ILogger<PeerService> logger, IServerStorage serverStorage) : IPeerService
 {
     public Peer CreatePeer(string name, byte[] address)
     {
