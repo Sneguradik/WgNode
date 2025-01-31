@@ -1,0 +1,23 @@
+﻿services:
+  wgnode:
+    image: wgnode
+    build:
+      context: .
+      dockerfile: WgNode/Dockerfile
+    environment:
+      WgHost : ""
+      WgPort: 34567
+      ASPNETCORE_ENVIRONMENT : "Development"
+    ports:
+      - "34567:34567/udp"
+      - "5000:5000/tcp"
+      - "5001:5001/tcp"
+    restart: always
+    cap_add:
+      - NET_ADMIN
+      - SYS_MODULE
+    sysctls:
+      - net.ipv4.ip_forward=1
+      - net.ipv4.conf.all.src_valid_mark=1
+    volumes:
+      - "./wg:/etc/wireguard"
